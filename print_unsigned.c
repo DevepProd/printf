@@ -4,35 +4,35 @@
 #include "main.h"
 
 /**
- * print_octal - prints octal
- * @o: octal to be printed
+ * print_unsigned - prints unsigned
+ * @d: unsigned to be printed
  * Return: size
  */
 
-int print_octal(va_list o)
+int print_unsigned(va_list u)
 {
 unsigned int len, pow, j, digit, n, num;
 int count = 0;
-n = va_arg(o, unsigned int);
+n = va_arg(u, unsigned int);
 if (n != 0)
 {
 num = n;
 len = 0;
 while (num != 0)
 {
-num /= 8;
+num /= 10;
 len++;
 }
 pow = 1;
 for (j = 1; j <= len - 1; j++)
-pow *= 8;
+pow *= 10;
 for (j = 1; j <= len; j++)
 {
 digit = n / pow;
 _putchar(digit + '0');
 count++;
 n -= (digit * pow);
-pow /= 8;
+pow /= 10;
 }
 }
 else

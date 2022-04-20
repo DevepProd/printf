@@ -1,34 +1,42 @@
-#include "main.h"
+# include "main.h"
 
 /**
- * print_rot13 - prints a string using rot13
- * @list: list of arguments from _printf
- * Return: length of the printed string
+ * rot13 - main function
+ * @y: The argument pointer.
+ *
+ * Description: This function prints the rot13'ed string.
+ *
+ * Return: The total number of characters.
  */
-
-int print_rot13(va_list list)
+int print_rot13(va_list R)
 {
-	int i;
-	int x;
-	char *str;
-	char s[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char u[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	char alph[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char rot13[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	int j, i = 0, count = 0, pl = 0;
+	char *s = va_arg(R, char*);
 
-	str = va_arg(list, char *);
-	if (str == NULL)
-		return (-1);
-	for (i = 0; str[i] != '\0'; i++)
+	if (s == NULL)
 	{
-		for (x = 0; x <= 52; x++)
+		s = "(null)";
+	}
+	while (s[i] != '\0')
+	{
+		pl = 0;
+		for (j = 0; alph[j] != '\0' && !pl; j++)
 		{
-			if (str[i] == s[x])
+			if (s[i] == alph[j])
 			{
-				_putchar(u[x]);
-				break;
+				_putchar(rot13[j]);
+				count++;
+				pl = 1;
 			}
 		}
-		if (x == 53)
-			_putchar(str[i]);
+		if (!pl)
+		{
+			_putchar(s[i]);
+			count++;
+		}
+		i++;
 	}
-	return (i);
+	return (count);
 }
